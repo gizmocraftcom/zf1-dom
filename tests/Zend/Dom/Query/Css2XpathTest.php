@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test class for Css2Xpath.
@@ -29,8 +30,8 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Dom
  */
+#[Group('Zend_Dom')]
 class Zend_Dom_Query_Css2XpathTest extends PHPUnit\Framework\TestCase
 {
     public function testTransformShouldBeCalledStatically()
@@ -46,9 +47,7 @@ class Zend_Dom_Query_Css2XpathTest extends PHPUnit\Framework\TestCase
         $this->assertIsString($test);
     }
 
-    /**
-     * @group ZF-6281
-     */
+    #[Group('ZF-6281')]
     public function testTransformShouldReturnMultiplePathsWhenExpressionContainsCommas()
     {
         $test = Zend_Dom_Query_Css2Xpath::transform('#foo, #bar');
@@ -88,9 +87,7 @@ class Zend_Dom_Query_Css2XpathTest extends PHPUnit\Framework\TestCase
         $this->assertEquals("//div[@id='foo']/span", $test);
     }
 
-    /**
-     * @group ZF-6281
-     */
+    #[Group('ZF-6281')]
     public function testMultipleComplexCssSpecificationShouldTransformToExpectedXpath()
     {
         $test = Zend_Dom_Query_Css2Xpath::transform('div#foo span.bar, #bar li.baz a');
@@ -146,36 +143,28 @@ class Zend_Dom_Query_Css2XpathTest extends PHPUnit\Framework\TestCase
         $this->assertEquals("//div[contains(@foo, 'bar')]", $test);
     }
 
-    /**
-     * @group ZF-4010
-     */
+    #[Group('ZF-4010')]
     public function testShouldAllowMatchingOfAttributeValues()
     {
         $test = Zend_Dom_Query_Css2Xpath::transform('tag#id @attribute');
         $this->assertEquals("//tag[@id='id']//@attribute", $test);
     }
 
-    /**
-     * @group ZF-8006
-     */
+    #[Group('ZF-8006')]
     public function testShouldAllowWhitespaceInDescendentSelectorExpressions()
     {
         $test = Zend_Dom_Query_Css2Xpath::transform('child > leaf');
         $this->assertEquals('//child/leaf', $test);
     }
 
-    /**
-     * @group ZF-9764
-     */
+    #[Group('ZF-9764')]
     public function testIdSelectorWithAttribute()
     {
         $test = Zend_Dom_Query_Css2Xpath::transform('#id[attribute="value"]');
         $this->assertEquals("//*[@id='id'][@attribute='value']", $test);
     }
 
-    /**
-     * @group ZF-9764
-     */
+    #[Group('ZF-9764')]
     public function testIdSelectorWithLeadingAsterix()
     {
         $test = Zend_Dom_Query_Css2Xpath::transform('*#id');

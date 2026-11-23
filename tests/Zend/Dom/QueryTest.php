@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test class for Zend_Dom_Query.
@@ -29,8 +30,8 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Dom
  */
+#[Group('Zend_Dom')]
 class Zend_Dom_QueryTest extends PHPUnit\Framework\TestCase
 {
     public $html;
@@ -234,9 +235,7 @@ EOF;
         $this->assertEquals('UTF-8', $testDocument->encoding);
     }
 
-    /**
-     * @group ZF-9243
-     */
+    #[Group('ZF-9243')]
     public function testLoadingDocumentWithErrorsShouldNotRaisePhpErrors()
     {
         $file = file_get_contents(dirname(__FILE__) . '/_files/bad-sample.html');
@@ -247,9 +246,7 @@ EOF;
         $this->assertTrue(0 < count($errors));
     }
 
-    /**
-     * @group ZF-9765
-     */
+    #[Group('ZF-9765')]
     public function testCssSelectorShouldFindNodesWhenMatchingMultipleAttributes()
     {
         $html = <<<EOF
@@ -275,36 +272,28 @@ EOF;
         $this->assertCount(1, $results);
     }
 
-    /**
-     * @group ZF-3938
-     */
+    #[Group('ZF-3938')]
     public function testAllowsSpecifyingEncodingAtConstruction()
     {
         $doc = new Zend_Dom_Query($this->getHtml(), 'iso-8859-1');
         $this->assertEquals('iso-8859-1', $doc->getEncoding());
     }
 
-    /**
-     * @group ZF-3938
-     */
+    #[Group('ZF-3938')]
     public function testAllowsSpecifyingEncodingWhenSettingDocument()
     {
         $this->query->setDocument($this->getHtml(), 'iso-8859-1');
         $this->assertEquals('iso-8859-1', $this->query->getEncoding());
     }
 
-    /**
-     * @group ZF-3938
-     */
+    #[Group('ZF-3938')]
     public function testAllowsSpecifyingEncodingViaSetter()
     {
         $this->query->setEncoding('iso-8859-1');
         $this->assertEquals('iso-8859-1', $this->query->getEncoding());
     }
 
-    /**
-     * @group ZF-3938
-     */
+    #[Group('ZF-3938')]
     public function testSpecifyingEncodingSetsEncodingOnDomDocument()
     {
         $this->query->setDocument($this->getHtml(), 'utf-8');
@@ -315,9 +304,7 @@ EOF;
         $this->assertEquals('utf-8', $doc->encoding);
     }
 
-    /**
-     * @group ZF-11376
-     */
+    #[Group('ZF-11376')]
     public function testXhtmlDocumentWithXmlDeclaration()
     {
         $xhtmlWithXmlDecl = <<<EOB
@@ -331,9 +318,7 @@ EOB;
         $this->assertEquals(1, $this->query->query('//p')->count());
     }
 
-    /**
-     * @group ZF-12106
-     */
+    #[Group('ZF-12106')]
     public function testXhtmlDocumentWithXmlAndDoctypeDeclaration()
     {
         $xhtmlWithXmlDecl = <<<EOB

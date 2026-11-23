@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,13 +28,11 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Dom
  */
+#[Group('Zend_Dom')]
 class Zend_Dom_Query_ResultTest extends PHPUnit\Framework\TestCase
 {
-    /**
-     * @group ZF-4631
-     */
+    #[Group('ZF-4631')]
     public function testEmptyResultDoesNotReturnIteratorValidTrue()
     {
         $dom           = new DOMDocument();
